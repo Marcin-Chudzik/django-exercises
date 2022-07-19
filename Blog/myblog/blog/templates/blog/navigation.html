@@ -1,0 +1,24 @@
+{% load static %}
+<nav>
+  <div class="container">
+    <div class="profile--items">
+      <a href="#" class="settings">
+        <img src="{% static 'blog_app/img/settings.png' %}" alt="settings">
+      </a>
+      <a href="#" class="profile">
+        <img src="{% static 'blog_app/img/profile.jpg' %}" alt="profile-img">
+      </a>
+      <h2>Marcin Chudzik</h2>
+    </div>
+    <form class="search-bar" method="POST">
+      <button type="submit" class="btn--search">
+        <img src="{% static 'blog_app/img/loupe.png' %}" alt="search">
+      </button>
+      <input type="search" placeholder="Search.." name="search">
+      {% csrf_token %}
+    </form>
+    <a href="{% url 'blog:post_list' %}" aria-label="go to the top">
+      <h1>BLOGPOSTER</h1>
+    </a>
+  </div>
+</nav>

@@ -1,0 +1,112 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+}
+
+.container {
+  width: 96%;
+  margin: 0 auto;
+}
+
+.container > a {
+  text-decoration: none;
+}
+
+nav {
+  position: fixed;
+  width: 100%;
+  background: linear-gradient(to bottom, #00c6ff, #0072ff);
+}
+
+nav h1, h2{
+  font-size: 40px;
+  color: white;
+}
+
+nav h2 {
+  font-size: 20px;
+  margin-left: 20%;
+  flex-shrink: 0;
+}
+
+nav img:hover {
+  transform: scale(1.1);
+}
+
+nav .container {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.profile--items {
+  height: initial;
+  display: flex;
+  align-items: center;
+}
+
+.settings {
+  position: relative;
+  margin: 12px 5px 0 14px;
+  bottom: 20px;
+}
+
+.settings img {
+  width: 25px;
+  height: 25px;
+}
+
+.profile img {
+  display: block;
+  width: auto;
+  height: 60px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 100px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  width: 30%;
+  height: 30px;
+  border: 1px solid black;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.10);
+}
+
+.search-bar input {
+  height: 100%;
+  width: 100%;
+  border: none;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background: white;
+}
+
+.btn--search {
+  width: 40px;
+  height: 30px;
+  background: white;
+  border: none;
+  border-right: 1px solid black;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  cursor: pointer;
+}
+
+.btn--search img {
+  width: auto;
+  max-height: 100%;
+}
+
+.content {
+  padding-top: 100px;
+}
