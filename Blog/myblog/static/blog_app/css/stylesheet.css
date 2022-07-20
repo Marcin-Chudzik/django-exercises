@@ -21,6 +21,19 @@ img:hover {
   text-decoration: none;
 }
 
+.btn {
+  padding: 10px;
+  border-radius: 10px;
+  background: #323232;
+  color: white;
+  text-decoration: none;
+}
+
+.btn--hidden {
+  visibility: hidden;
+  cursor: none;
+}
+
 .btn--with--icon {
   width: 20px;
   height: 20px;
@@ -34,16 +47,24 @@ img:hover {
   height: inherit;
 }
 
+.paginator {
+  position: fixed;
+  bottom: 2vh;
+  font-size: 14px;
+  font-weight: 600;
+}
+
 .nav_bar {
   position: fixed;
   width: 100%;
-  background: linear-gradient(to bottom, #00c6ff, #0072ff);
+  background: linear-gradient(to bottom, #AAFFA9, #11ffbd);
+  box-shadow: 0 3px 20px dimgray;
 }
 
 .nav_bar h1, h2 {
-  font-size: 40px;
+  font-size: 50px;
   font-weight: 700;
-  color: white;
+  color: #323232;
 }
 
 .nav_bar h2 {
@@ -57,6 +78,10 @@ img:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.nav_bar .profile-img {
+  border: none;
 }
 
 .profile--items {
@@ -79,6 +104,7 @@ img:hover {
 .profile-img {
   width: 60px;
   height: 60px;
+  border: 1px solid #11ffbd;
   border-radius: 50%;
   object-fit: cover;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -108,7 +134,7 @@ img:hover {
   height: 30px;
   background: white;
   border: none;
-  border-right: 1px solid black;
+  border-right: 1px solid #323232;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
   cursor: pointer;
@@ -123,9 +149,17 @@ img:hover {
   padding-top: 80px;
 }
 
+.tags {
+  padding-top: 10px;
+  display: block;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+}
+
 .post {
   width: 57%;
-  max-height: 280px;
+  max-height: 30vh;
   margin: 25px 120px 25px 270px;
   display: flex;
   justify-content: space-between;
@@ -139,13 +173,12 @@ img:hover {
 
 .information-container {
   width: 36.5%;
-  height: 100%;
   padding: 3px;
   margin-right: 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid black;
+  border: 1px solid #323232;
   border-radius: 10px;
 }
 
@@ -171,21 +204,37 @@ img:hover {
   align-self: flex-end;
 }
 
+.comments {
+  width: 100%;
+  max-height: 207px;
+  margin-top: 5px;
+  border-top: 1px solid #323232;
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.comments::-webkit-scrollbar {
+  display: none;
+}
+
 .comment {
-  width: 93%;
+  width: 95%;
   height: 100px;
   margin: 10px 0;
   padding: 3px;
   display: flex;
   flex-direction: column;
-  border: 1px solid dimgray;
-  border-radius: 10px;
 }
 
 .comment--information {
   width: 100%;
   display: flex;
   flex-direction: row;
+}
+
+.comment--information h4 {
+  align-self: center;
 }
 
 .comment--information time {
@@ -210,7 +259,7 @@ img:hover {
   width: 73.5%;
   height: 100%;
   padding: 5px;
-  border: 1px solid black;
+  border: 1px solid #323232;
   border-radius: 10px;
 }
 
