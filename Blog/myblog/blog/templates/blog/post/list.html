@@ -3,7 +3,7 @@
 
 {% block content %}
   {% if tag %}
-    <h2> Posts marked with tag "{{ tag.name }}"</h2>
+  <label class="tags">Posts marked with tag "{{ tag.name }}"</label>
   {% endif %}
 
   {% for post in posts %}
@@ -28,17 +28,19 @@
         <strong>0</strong>
       </div>
 
-      <div class="comment">
-        <div class="comment--information">
-          <a href="#" aria-label="profile account">
-            <img class="profile-img" src="{% static 'blog_app/img/profile.png' %}" alt="profile-img">
-          </a>
-          <h4>Marcin Chudzik</h4>
-          <time>{{ post.publish|date:"d.m.Y" }}</time>
+      <div class="comments">
+        <div class="comment">
+          <div class="comment--information">
+            <a href="#" aria-label="profile account">
+              <img class="profile-img" src="{% static 'blog_app/img/profile.png' %}" alt="profile-img">
+            </a>
+            <h4>Marcin Chudzik</h4>
+            <time>{{ post.publish|date:"d.m.Y" }}</time>
+          </div>
+          <p class="comment-content">
+            Some comment content.
+          </p>
         </div>
-        <p class="comment-content">
-          Some comment content.
-        </p>
       </div>
     </div>
 
