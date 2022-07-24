@@ -17,7 +17,7 @@ class Post(models.Model):
         ('draft', 'Draft'),
         ('published', 'Published'),
     )
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=50)
     slug = models.SlugField(max_length=150, unique_for_date='publish')
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_posts')
     body = models.TextField()
@@ -26,6 +26,8 @@ class Post(models.Model):
     updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
     tags = TaggableManager()
+    like = models.IntegerField(default=0)
+    comment = models.IntegerField(default=0)
 
     class Meta:
         ordering = ('-publish',)
