@@ -1,37 +1,29 @@
 {% extends "blog/base.html" %}
 
-{% block title %}{{ post.title }}{% endblock %}
-
 {% block content %}
-  <h1>{{ post.title }}</h1>
-  <p>
-    Opublikowany {{ post.publish }} przez {{ post.author }}
+<section class="post-detail">
+  <h1 class="post-detail--title">{{ post.title }}</h1>
+  <div class="container">
+  <p class="post-detail--information">
+    Published by {{ post.author.first_name }} {{ post.author.last_name }}
+    in <time>{{ post.publish|date:"d.m.Y" }}</time>
   </p>
-  {{ post.body|linebreaks }}
-  <h2>Podobne posty</h2>
-  {% for post in similar_posts %}
-    <p>
-      <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
-    </p>
-  {% empty %}
-    Nie ma podobnych postów.
-  {% endfor %}
+  <p class="post-detail--text" style="align-self: flex-start">{{ post.body }}</p>
+  <div class="post-detail--comments">
   {% with comments.count as total_comments %}
-    <h2>
-      {{ total_comments }} komentarz{{ total_comments|pluralize:"y" }}
-    </h2>
+    <h3>{{ total_comments }} comment{{ total_comments|pluralize:"s" }}</h3>
   {% endwith %}
+<!-- COMMENTS -->
   {% for comment in comments %}
-    <div>
-      <p>
-        Komentarz {{ forloop.counter }} dodany przez {{ comment.name }}
-        {{ comment.created }}
-      </p>
-      {{ comment.body|linebreaks }}
+    <div class="post-detail--comment">
+      <h3>{{ comment.name }}</h3>
+      <time>{{ comment.created|date:"d.m.Y" }}</time>
+      <p>{{ comment.body }}</p>
     </div>
   {% empty %}
     <p>Nie ma jeszcze żadnych komentarzy</p>
   {% endfor %}
+  </div>
   {% if new_comment %}
     <h2>Twój komentarz został dodany.</h2>
   {% else %}
@@ -47,4 +39,15 @@
       Udostępnij post
     </a>
   </p>
+<!--  SIMILAR POSTS -->
+  <h2>Similar posts:</h2>
+  {% for post in similar_posts %}
+    <p>
+      <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+    </p>
+  {% empty %}
+    No matched posts.
+  {% endfor %}
+  </div>
+</section>
 {% endblock %}
