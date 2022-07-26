@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>{% block title %}{% endblock %}</title>
-  <link rel="stylesheet" type="text/css" href="{% static 'blog_app/css/reset.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'blog_app/css/stylesheet.css' %}">
-</head>
+  <head>
+    <meta charset="UTF-8">
+    <title>Tweeby</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'blog_app/css/reset.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'blog_app/css/stylesheet.css' %}">
+  </head>
 
-<body>
-  {% include "blog/navigation.html" %}
-  <div class="content" id="content">
-    {% block content %}
-    {% endblock %}
-  </div>
-</body>
+  <body>
+    {% include "blog/navigation.html" %}
+    <div class="content" id="content">
+      {% block content %}
+      {% endblock %}
+    </div>
+    {% include "blog/footer.html" %}
+  </body>
 </html>

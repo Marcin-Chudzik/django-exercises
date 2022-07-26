@@ -4,50 +4,69 @@
 <section class="post-detail">
   <h1 class="post-detail--title">{{ post.title }}</h1>
   <div class="container">
-  <p class="post-detail--information">
-    Published by {{ post.author.first_name }} {{ post.author.last_name }}
-    in <time>{{ post.publish|date:"d.m.Y" }}</time>
-  </p>
-  <p class="post-detail--text" style="align-self: flex-start">{{ post.body }}</p>
-  <div class="post-detail--comments">
-  {% with comments.count as total_comments %}
-    <h3>{{ total_comments }} comment{{ total_comments|pluralize:"s" }}</h3>
-  {% endwith %}
-<!-- COMMENTS -->
-  {% for comment in comments %}
-    <div class="post-detail--comment">
-      <h3>{{ comment.name }}</h3>
-      <time>{{ comment.created|date:"d.m.Y" }}</time>
-      <p>{{ comment.body }}</p>
-    </div>
-  {% empty %}
-    <p>Nie ma jeszcze żadnych komentarzy</p>
-  {% endfor %}
-  </div>
-  {% if new_comment %}
-    <h2>Twój komentarz został dodany.</h2>
-  {% else %}
-    <h2>Dodaj nowy komentarz</h2>
-    <form action="." method="post">
-      {{ comment_form.as_p }}
-      {% csrf_token %}
-      <button type="submit">Dodaj komentarz</button>
-    </form>
-  {% endif %}
-  <p>
-    <a href="{% url 'blog:post_share' post.id %}">
-      Udostępnij post
-    </a>
-  </p>
-<!--  SIMILAR POSTS -->
-  <h2>Similar posts:</h2>
-  {% for post in similar_posts %}
-    <p>
-      <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+    <p class="post-detail--information">
+      Published by {{ post.author.first_name }} {{ post.author.last_name }}
+      in <time>{{ post.publish|date:"d.m.Y" }}</time>
     </p>
-  {% empty %}
-    No matched posts.
-  {% endfor %}
+    <p class="post-detail--text" style="align-self: flex-start">{{ post.body }}</p>
+    <div class="post-detail--comments">
+      {% with comments.count as total_comments %}
+      <h2>{{ total_comments }} comment{{ total_comments|pluralize:"s" }}</h2>
+      {% endwith %}
+      <!-- COMMENTS -->
+      {% for comment in comments %}
+      <div class="post-detail--comment">
+        <h3>{{ comment.name }}</h3>
+        <time>{{ comment.created|date:"d.m.Y" }}</time>
+        <p>{{ comment.body }}</p>
+      </div>
+      {% empty %}
+      <div class="post-detail--comment">
+        <p>No comments yet</p>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!--  {% if new_comment %}-->
+    <!--    <h2>Twój komentarz został dodany.</h2>-->
+    <!--  {% else %}-->
+    <!--    <h2>Dodaj nowy komentarz</h2>-->
+    <!--    <form action="." method="post">-->
+    <!--      {{ comment_form.as_p }}-->
+    <!--      {% csrf_token %}-->
+    <!--      <button type="submit">Dodaj komentarz</button>-->
+    <!--    </form>-->
+    <!--  {% endif %}-->
+    <!--  <p>-->
+    <!--    <a href="{% url 'blog:post_share' post.id %}">-->
+    <!--      Udostępnij post-->
+    <!--    </a>-->
+    <!--  </p>-->
+
+    <!--  BUTTONS -->
+    <div class="post-detail--buttons">
+      <button class="btn" type="button" id="modal-comment">Add comment</button>
+      <button class="btn" type="button" id="modal-share">Share post</button>
+    </div>
+
+    <!--  SIMILAR POSTS -->
+    <!--  <h2>Similar posts:</h2>-->
+    <!--  {% for post in similar_posts %}-->
+    <!--    <p>-->
+    <!--      <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>-->
+    <!--    </p>-->
+    <!--  {% empty %}-->
+    <!--    No matched posts.-->
+    <!--  {% endfor %}-->
+
+    <h2>Similar posts</h2>
+    <div class="similar-posts">
+      {% for post in similar_posts %}
+      <div class="similar_post">
+
+      </div>
+      {% endfor %}
+    </div>
   </div>
 </section>
 {% endblock %}

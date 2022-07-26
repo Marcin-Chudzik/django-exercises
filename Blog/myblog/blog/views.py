@@ -6,7 +6,9 @@ from django.views.generic import ListView
 from taggit.models import Tag
 
 from .forms import EmailPostForm, CommentForm
-from .models import Post, Comment
+from .models import Post
+from django.http import HttpResponseRedirect
+from django.shortcuts import reverse
 
 
 class PostListView(ListView):
@@ -22,17 +24,18 @@ def post_list(request, tag_slug=None):
     tag = None
 
     if request.method == "POST":
-        post_id = int(request.POST.get('post-id'))
-        post = Post.objects.get(pk=post_id)
-        like = request.POST.get('like')
+        if 'post-id' in request.POST:
+            post_id = int(request.POST.get('post-id'))
+            post = Post.objects.get(pk=post_id)
+            like = request.POST.get('like')
 
-        match like:
-            case 'like':
-                post.like += 1
-                post.save()
-            case 'unlike':
-                post.like -= 1
-                post.save()
+            match like:
+                case 'like':
+                    post.like += 1
+                    post.save()
+                case 'unlike':
+                    post.like -= 1
+                    post.save()
 
     if tag_slug:
         tag = get_object_or_404(Tag, slug=tag_slug)
@@ -57,18 +60,20 @@ def post_detail(request, year, month, day, post):
                              publish__month=month,
                              publish__day=day)
     comments = post.comments.filter(active=True)
+    post_tags_ids = post.tags.values_list('id', flat=True)
+    similar_posts = Post.published.filter(tags__in=post_tags_ids).exclude(id=post.id)
+    similar_posts = similar_posts.annotate(same_tags=Count('tags')).order_by('-same_tags', '-publish')[:4]
 
     if request.method == 'POST':
-        comment_form = CommentForm(data=request.POST)
+        comment_form = CommentForm(request.POST)
         if comment_form.is_valid():
             new_comment = comment_form.save(commit=False)
             new_comment.post = post
             new_comment.save()
+            return HttpResponseRedirect(reverse('blog:post_detail',
+                                                args=[year, month, day, post.slug]))
     else:
         comment_form = CommentForm()
-    post_tags_ids = post.tags.values_list('id', flat=True)
-    similar_posts = Post.published.filter(tags__in=post_tags_ids).exclude(id=post.id)
-    similar_posts = similar_posts.annotate(same_tags=Count('tags')).order_by('-same_tags', '-publish')[:4]
     return render(request, 'blog/post/detail.html',
                   {'post': post, 'comments': comments, 'comment_form': comment_form, 'similar_posts': similar_posts})
 
