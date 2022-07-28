@@ -30,10 +30,20 @@
         </form>
         <strong>{{ post.like }}</strong>
 
-        <button type="button" class="btn--with--icon" id="comment-modal">
+        <button class="btn--with--icon" id="modal-btn">
           <img src="{% static 'blog_app/img/comments.png' %}" alt="comment">
         </button>
-        <strong>{{ post.comment }}</strong>
+
+        <link rel="script" href="{% static 'blog_app/scripts/modal.js' %}">
+        <div id="modal" class="modal modal--comment">
+          <div class="modal-content--comment">
+            <span class="close">&times;</span>
+            <p>Some text in modal...</p>
+          </div>
+        </div>
+
+
+        <strong>{{ post.comments.count }}</strong>
       </div>
 
       <div class="comments">
@@ -58,13 +68,13 @@
 
     <div class="content-container">
       <a href="{{ post.get_absolute_url }}">{{ post.title|truncatechars:28 }}</a>
-      <div class="tags">
+      <span class="tags">
         {% for tag in post.tags.all %}
-        <a class="btn btn--tag" href="{% url 'blog:post_list_by_tag' tag.slug %}">
+        <a class="btn btn--dark btn--tag" href="{% url 'blog:post_list_by_tag' tag.slug %}">
           {{ tag.name }}
         </a>
         {% endfor %}
-      </div>
+      </span>
       <h4>{{ post.author.first_name }} {{ post.author.last_name }}</h4>
       <p>posted on <time>{{ post.publish|date:"d.m.Y" }}</time></p>
       <div class="post--body">
