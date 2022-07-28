@@ -26,44 +26,25 @@
       </div>
       {% endfor %}
     </div>
-
-    <!--  {% if new_comment %}-->
-    <!--    <h2>Twój komentarz został dodany.</h2>-->
-    <!--  {% else %}-->
-    <!--    <h2>Dodaj nowy komentarz</h2>-->
-    <!--    <form action="." method="post">-->
-    <!--      {{ comment_form.as_p }}-->
-    <!--      {% csrf_token %}-->
-    <!--      <button type="submit">Dodaj komentarz</button>-->
-    <!--    </form>-->
-    <!--  {% endif %}-->
-    <!--  <p>-->
-    <!--    <a href="{% url 'blog:post_share' post.id %}">-->
-    <!--      Udostępnij post-->
-    <!--    </a>-->
-    <!--  </p>-->
-
     <!--  BUTTONS -->
     <div class="post-detail--buttons">
-      <button class="btn" type="button" id="modal-comment">Add comment</button>
-      <button class="btn" type="button" id="modal-share">Share post</button>
+      <button class="btn btn--green" type="button" id="modal-comment">Add comment</button>
+      <button class="btn btn--green" type="button" id="modal-share">Share post</button>
     </div>
-
     <!--  SIMILAR POSTS -->
-    <!--  <h2>Similar posts:</h2>-->
-    <!--  {% for post in similar_posts %}-->
-    <!--    <p>-->
-    <!--      <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>-->
-    <!--    </p>-->
-    <!--  {% empty %}-->
-    <!--    No matched posts.-->
-    <!--  {% endfor %}-->
-
-    <h2>Similar posts</h2>
     <div class="similar-posts">
       {% for post in similar_posts %}
-      <div class="similar_post">
-
+      <div class="similar-post">
+        <h2>{{ post.title }}</h2>
+        <span class="tags">
+          {% for tag in post.tags.all %}
+            <a class="btn btn--dark btn--tag" href="{% url 'blog:post_list_by_tag' tag.slug %}">
+              {{ tag.name }}
+            </a>
+          {% endfor %}
+        </span>
+        <p>{{ post.body|truncatechars:150 }}</p>
+        <a href="{{ post.get_absolute_url }}" class="btn btn--green">Check</a>
       </div>
       {% endfor %}
     </div>
