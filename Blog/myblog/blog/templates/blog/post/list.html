@@ -30,19 +30,9 @@
         </form>
         <strong>{{ post.like }}</strong>
 
-        <button class="btn--with--icon" id="modal-btn">
+        <button class="btn--with--icon">
           <img src="{% static 'blog_app/img/comments.png' %}" alt="comment">
         </button>
-
-        <link rel="script" href="{% static 'blog_app/scripts/modal.js' %}">
-        <div id="modal" class="modal modal--comment">
-          <div class="modal-content--comment">
-            <span class="close">&times;</span>
-            <p>Some text in modal...</p>
-          </div>
-        </div>
-
-
         <strong>{{ post.comments.count }}</strong>
       </div>
 
